@@ -4,7 +4,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import CommentContainer from './CommentContainer';
 import InputCommentReply from './InputCommentReply';
 
-function ListCommentReply({ comment, id, commentFirst }) {
+function ListCommentReply({ comment, gameId, commentFirst }) {
     const roomId = comment.roomId;
     const [isCmtsReply, setIsCmtReply] = useState(false);
     const [listCommentReply, setListCommentReply] = useState([]);
@@ -23,7 +23,7 @@ function ListCommentReply({ comment, id, commentFirst }) {
 
         const unsubcribe = db.collection("comments")
             .orderBy('createdAt', 'asc')
-            .where("gameId", "==", id)
+            .where("gameId", "==", gameId)
             .where("isFirst", "==", false)
             .where("roomId", "==", roomId)
             .onSnapshot((querySnapshot) => {
@@ -33,9 +33,9 @@ function ListCommentReply({ comment, id, commentFirst }) {
                 })
                 setListCommentReply(data);
             });
-
         return () => unsubcribe();
-    }, [roomId, id])
+    }, [roomId, gameId]);
+    
     return (
         <div className="comment-item__reply">
             <div onClick={() => handleFetchReply(roomId)} className="comment-item__reply-more">
@@ -52,7 +52,11 @@ function ListCommentReply({ comment, id, commentFirst }) {
                         />
                         <CommentContainer comment={commentReply} />
                     </div>
-                    <InputCommentReply comment={commentReply} id={id} commentFirst={commentFirst} />
+                    <InputCommentReply
+                        comment={commentReply}
+                        gameId={gameId}
+                        commentFirst={commentFirst}
+                    />
                 </div>)
             }
         </div>

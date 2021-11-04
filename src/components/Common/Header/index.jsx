@@ -33,9 +33,9 @@ export default function Header() {
                     </div>
                 ))}
             </div>
-            {/* <div className="header-notify">
+            <div className="header-notify">
                 <Notify />
-            </div> */}
+            </div>
             <div className="header-theme">
                 <ThemeToggler />
             </div>

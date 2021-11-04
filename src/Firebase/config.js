@@ -4,12 +4,12 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAg5O1qyo2PICx1aJxNPqZ0frBlt0p6UWE",
+    apiKey: process.env.REACT_APP_APIKEY,
     authDomain: "appgameke.firebaseapp.com",
     projectId: "appgameke",
     storageBucket: "appgameke.appspot.com",
     messagingSenderId: "574450856353",
-    appId: "1:574450856353:web:4bbdca6167f4d34e7b5be0",
+    appId: process.env.REACT_APP_APPID,
     measurementId: "G-9JQZ5NTBK2"
 };
 

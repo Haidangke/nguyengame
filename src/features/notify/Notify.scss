@@ -1,7 +1,78 @@
+@import "styles/_mixin.scss";
+@keyframes fadeInPopupAuth {
+    from {
+        top: 100%;
+        opacity: 0.6;
+    }
+    to {
+        top: 120%;
+        opacity: 1;
+    }
+}
 .notify {
+    position: relative;
+
     &-icon svg {
         margin-right: 18px;
         color: var(--color-theme-oppose);
         font-size: 3rem;
+    }
+
+    &-container {
+        position: absolute;
+        right: 50%;
+        top: 120%;
+        width: 400px;
+        background-color: var(--background-color3);
+        box-shadow: 0 -4px 20px var(--box-shadow-color);
+        border-radius: 8px;
+
+        animation-name: fadeInPopupAuth;
+        animation-duration: 0.4s;
+    }
+    &-title {
+        padding: 16px 20px;
+        font-size: 1.6rem;
+        color: var(--text-color1);
+    }
+    &-list {
+        padding-bottom: 10px;
+    }
+    &-item {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        margin: 12px;
+    }
+    &-item__avatar {
+        width: 48px;
+        height: 48px;
+        margin-right: 10px;
+        border-radius: 50px;
+    }
+    &-item__main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        max-width: 262px;
+        min-height: 60px;
+    }
+    &-item__content {
+        line-height: 1.5;
+        font-size: 1.3rem;
+        color: var(--text-color2);
+    }
+    &-item__date {
+        font-size: 1.2rem;
+        color: var(--text-color2);
+    }
+
+    @include mobile {
+        &-container {
+            position: fixed;
+            top: 60px;
+            right: 4%;
+            width: 92%;
+        }
     }
 }

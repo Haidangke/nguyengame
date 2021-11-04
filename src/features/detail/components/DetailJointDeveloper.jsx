@@ -33,7 +33,7 @@ function DetailJointDeveloper({ involved_companies }) {
                         limit: 18
                     })
                     setListJointDeveloper({
-                        data: response,
+                        data: response.length > 1 ? response : [],
                         isFetched: true,
                         isLoading: false
                     });

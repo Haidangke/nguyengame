@@ -1,7 +1,8 @@
 import { gameApi } from 'apis/gameApi';
 import ItemGame from 'features/discover/components/ListGame/ItemGame';
-import React from 'react';
-import { useQuery } from 'react-query';
+import React, { Fragment } from 'react';
+import ReactLoading from 'react-loading';
+import { useInfiniteQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 import BrowseGameLoading from './BrowseGameLoading';
 
@@ -10,7 +11,7 @@ function BrowseGame() {
         genresCheck,
         gameModeCheck,
         platformsCheck,
-        sort
+        sort,
     } = useSelector(state => state.browse);
 
     const filter = (genresCheck, gameModeCheck, platformsCheck) => {
@@ -25,34 +26,66 @@ function BrowseGame() {
             filter.push(`platforms = [${platformsCheck}]`);
 
         return filter;
-    }
+    };
 
-    const { data, isLoading, isFetched } = useQuery(['listGame',
+    const {
+        status,
+        data,
+        isFetched,
+        isFetchingNextPage,
+        fetchNextPage,
+        hasNextPage,
+
+    } = useInfiniteQuery(['listGame',
         { genresCheck, gameModeCheck, platformsCheck, sort }],
-        async () => await gameApi.getAllShort({
+        async ({ pageParam = 0 }) => await gameApi.getAllShort({
             filter: [...filter(genresCheck, gameModeCheck, platformsCheck), "cover != null"],
             limit: 24,
-            sort
-        })
-    );
+            sort,
+            offset: 24 * pageParam
+        }), {
+        getNextPageParam: lastPage => lastPage.length > 0 ?? false
 
-    if (isLoading) return <BrowseGameLoading />;
+    });
 
-    if (isFetched && data.length === 0)
+    if (status === 'loading') return <BrowseGameLoading />;
+
+    if (isFetched && data.pages[0].length === 0)
         return (<div className="browse-games--not">
             <h2>Không tìm thấy kết quả</h2>
             <p>Rất tiếc tôi không tìm thấy kết quả nào phù hợp cho bạn :(</p>
         </div>)
 
     return (
-        <div className="browse-games">
-            {data.map(game =>
-                <div key={game.id} className="browse-game">
-                    <ItemGame game={game} />
-                </div>
-            )}
-        </div>
-    );
+        <Fragment>
+            <div className="browse-games">
+                {data.pages?.map((page, index) => (
+                    <React.Fragment key={index}>
+                        {page?.map(game => (
+                            <div key={game.id} className="browse-game">
+                                <ItemGame game={game} />
+                            </div>
+                        ))}
+                    </React.Fragment>
+                ))}
+            </div>
+
+            {hasNextPage && <div
+                className="browse-limit"
+                onClick={() => fetchNextPage()}
+            >
+                {isFetchingNextPage ?
+                    <ReactLoading
+                        type="spinningBubbles"
+                        color="white"
+                        width={20}
+                        height={20}
+                    /> : 'Xem thêm'
+                }
+            </div>}
+
+        </Fragment>
+    )
 }
 
 export default BrowseGame;

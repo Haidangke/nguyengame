@@ -1,7 +1,7 @@
 import cmtApi from 'apis/cmtApi';
 import React, { useEffect, useState } from 'react';
 
-function CommentMe({ id }) {
+function CommentMe({ gameId }) {
     const [comment, setComment] = useState("");
     const user = JSON.parse(localStorage.getItem('user'));
     const photoURL = user?.photoURL;
@@ -10,7 +10,7 @@ function CommentMe({ id }) {
         if (!comment) return;
         setComment("");
         cmtApi.addCmt({
-            gameId: id,
+            gameId,
             content: comment,
             isFirst: true,
             quantity: 0
@@ -19,7 +19,7 @@ function CommentMe({ id }) {
 
     useEffect(() => {
         setComment("");
-    }, [id]);
+    }, [gameId]);
 
     return (
         user ?

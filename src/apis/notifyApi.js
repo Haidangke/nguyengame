@@ -9,7 +9,6 @@ const notifyApi = {
             sender: userId,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             ...notify
-            
         })
     }
 }

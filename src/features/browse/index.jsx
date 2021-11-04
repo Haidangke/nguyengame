@@ -2,6 +2,7 @@ import React from 'react';
 import "./Browse.scss";
 import BrowseListGame from './components/BrowseGame';
 import BrowseSort from './components/BrowseSort';
+import BrowseToTop from './components/BrowseToTop';
 import BrowserFilter from './components/Filter';
 
 function Browse() {
@@ -14,7 +15,9 @@ function Browse() {
             <div className="browse-right">
                 <BrowserFilter />
             </div>
-
+            <div className="browse-to-top">
+                <BrowseToTop />
+            </div>
         </div>
     )
 }

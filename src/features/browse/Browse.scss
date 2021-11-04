@@ -9,9 +9,18 @@
         opacity: 1;
     }
 }
+
+@keyframes hideIn {
+    from {
+        opacity: 0.6;
+    }
+    to {
+        opacity: 1;
+    }
+}
 .browse {
     display: flex;
-    padding-bottom: 70px;
+    padding-bottom: 50px;
     margin-top: 30px;
     gap: 22px;
     &-left {
@@ -108,7 +117,29 @@
         border-radius: 8px;
     }
 
-    &-pagination {
+    &-limit {
+        @include flex(center, center);
+        width: 260px;
+        height: 40px;
+
+        margin: 40px auto 0;
+
+        border: 1px solid var(--text-color3);
+        border-radius: 2px;
+
+        background-color: none;
+        color: var(--color-theme-oppose);
+
+        font-size: 1.6rem;
+        text-align: center;
+        text-transform: uppercase;
+
+        transition: var(--transition-base);
+        cursor: pointer;
+    }
+
+    &-limit:hover {
+        opacity: 0.8;
     }
 
     &-right {
@@ -119,7 +150,6 @@
         flex-basis: 245px;
         max-width: 245px;
         min-width: 245px;
-        height: 2300px;
     }
     &-filter__mobile {
         display: none;
@@ -137,9 +167,6 @@
         letter-spacing: 0.05rem;
     }
     &-filter__list {
-        position: sticky;
-        position: -webkit-sticky;
-        top: 126px;
     }
     &-filter__item {
         margin-right: 10px;
@@ -187,9 +214,43 @@
         display: none;
     }
 
+    &-to-top {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        transition: var(--transition-base);
+        cursor: pointer;
+    }
+
+    &-to-top > span {
+        @include flex(center, center);
+        width: 48px;
+        height: 48px;
+        border-radius: 50px;
+        background-color: var(--color-theme-oppose);
+        color: var(--color-theme);
+        box-shadow: 0 -4px 32px var(--background-color2-5);
+
+        animation-name: hideIn;
+        animation-duration: 0.4s;
+    }
+
+    &-to-top > span > svg {
+        font-size: 2rem;
+    }
+
     @include pc {
         &-filter__item-container > label:hover {
             background-color: var(--background-color1);
+            opacity: 0.8;
+        }
+
+        &-to-top {
+            bottom: 60px;
+            right: 60px;
+        }
+
+        &-to-top:hover {
             opacity: 0.8;
         }
     }
@@ -235,7 +296,7 @@
             position: unset;
             max-height: 100%;
             overflow-y: scroll;
-            padding-bottom: 140px ;
+            padding-bottom: 140px;
         }
 
         &-filter__item-container > label:active {
@@ -291,6 +352,10 @@
 
         &-game--loading > &-game__image {
             min-height: 260px;
+        }
+
+        &-to-top:active {
+            opacity: 0.8;
         }
     }
 }

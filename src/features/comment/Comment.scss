@@ -169,7 +169,8 @@
     &-item__features {
         display: flex;
         align-items: center;
-        margin: 24px 0 14px 55px;
+        margin: 20px 0 10px 55px;
+        min-height: 20px;
     }
     &-item__features-like,
     &-item__features-reply {
@@ -184,7 +185,9 @@
         color: var(--primary-color);
         font-weight: 600
     }
-    &-item__features-reply {
+    &-item__features-like {
+        min-width: 36px;
+        max-width: 50px;
     }
     &-item__features-dates {
         font-size: 1.4rem;

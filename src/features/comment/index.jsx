@@ -7,16 +7,17 @@ import InputCommentReply from './components/InputCommentReply';
 import ListCommentReply from './components/ListCommentReply';
 
 
-function Comment({ id }) {
+function Comment({ gameId }) {
     const [totalComment, setTotalComment] = useState(0);
     const [listCommentFrist, setListCommentFirst] = useState([]);
 
     useEffect(() => {
         setTotalComment(0);
         setListCommentFirst([]);
+
         const unsubcribe = db.collection("comments")
             .orderBy('createdAt', 'desc')
-            .where("gameId", "==", id)
+            .where("gameId", "==", gameId)
             .where("isFirst", "==", true)
             .onSnapshot((querySnapshot) => {
                 const data = [];
@@ -28,14 +29,16 @@ function Comment({ id }) {
                 const totalComment = data.reduce((a, b) => a + b.quantity + 1, 0);
                 setTotalComment(totalComment);
             });
+
         return unsubcribe;
-    }, [id]);
+    }, [gameId]);
 
 
     return (
         <div className="comment">
             <div className="comment-heading">{totalComment} bình luận</div>
-            <CommentMe id={id} />
+            <CommentMe gameId={gameId} />
+
             <div className="comment-main">
                 {listCommentFrist.map(commentFirst => (
                     <div key={commentFirst.id} className="comment-group">
@@ -44,9 +47,17 @@ function Comment({ id }) {
                                 <img className="comment-item__avatar" src={commentFirst.photoURL} alt="avatar" />
                                 <CommentContainer comment={commentFirst} />
                             </div>
-                            <InputCommentReply id={id} comment={commentFirst} commentFirst={commentFirst} />
+                            <InputCommentReply
+                                gameId={gameId}
+                                comment={commentFirst}
+                                commentFirst={commentFirst}
+                            />
                         </div>
-                        <ListCommentReply id={id} comment={commentFirst} commentFirst={commentFirst} />
+                        <ListCommentReply
+                            gameId={gameId}
+                            comment={commentFirst}
+                            commentFirst={commentFirst}
+                        />
                     </div>
                 ))}
             </div>

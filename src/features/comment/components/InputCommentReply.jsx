@@ -4,7 +4,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import formatDate from 'utils/formatTime';
 import LikeComment from './LikeComment';
 
-function InputCommentReply({ id, comment, commentFirst }) {
+function InputCommentReply({ gameId, comment, commentFirst }) {
     const user = JSON.parse(localStorage.getItem('user'));
     const userId = user?.userId;
     const displayName = user?.displayName;
@@ -14,31 +14,31 @@ function InputCommentReply({ id, comment, commentFirst }) {
     const [cmtReply, setCmtReply] = useState("");
 
     const handleReply = async () => {
-        const idGame = commentFirst.id;
+        const cmtId = commentFirst.id;
 
         const roomId = comment.roomId;
         const receiverName = comment.displayName;
         const receiverId = comment.userId;
-        const receiverUrl = comment.photoURL;
+        const receiverPhoto = comment.photoURL;
 
         if (receiverId !== userId) {
             await notifyApi.addNotify({
                 receiver: receiverId,
-                receiverUrl,
-                address: `/detail/${id}`,
+                receiverPhoto,
+                address: `/detail/${gameId}`,
                 content: `<span>${displayName}</span>đã nhắc tới bạn trong một bình luận`,
-            })
+            });
         };
 
         await cmtApi.addCmt({
-            gameId: id,
+            gameId,
             content: cmtReply,
             isFirst: false,
             roomId,
             receiver: receiverName !== displayName ? receiverName : ""
         });
 
-        await cmtApi.increaseCmt(idGame, "quantity");
+        await cmtApi.increaseCmt(cmtId, "quantity");
         setCmtReply("");
     };
 
@@ -46,13 +46,13 @@ function InputCommentReply({ id, comment, commentFirst }) {
         setIsInputReply(false);
         setCmtReply("");
 
-    }, [id]);
+    }, [gameId]);
 
     return (
         <Fragment>
             <div className="comment-item__features">
                 {user && <Fragment>
-                    <LikeComment comment={comment} />
+                    <LikeComment comment={comment} gameId={gameId} />
                     <div
                         onClick={() => setIsInputReply(!isInputReply)}
                         className="comment-item__features-reply"

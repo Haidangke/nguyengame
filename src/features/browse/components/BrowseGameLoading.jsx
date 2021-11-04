@@ -1,7 +1,9 @@
 import useDeclareArray from 'hooks/useDeclareArray';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 function BrowseGameLoading() {
+    const { limit } = useSelector(state => state.browse);
     const listLoading = useDeclareArray(24);
     return (
         <div className="browse-games">
@@ -19,8 +21,6 @@ function BrowseGameLoading() {
                         </div>
                     </div>
                 </div>
-
-
             )}
         </div>
     );

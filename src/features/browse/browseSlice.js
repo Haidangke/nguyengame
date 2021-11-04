@@ -4,7 +4,7 @@ const initialState = {
     genresCheck: [],
     gameModeCheck: [],
     platformsCheck: [],
-    sort: 'first_release_date desc'
+    sort: 'first_release_date desc',
 }
 
 const browseSlice = createSlice({

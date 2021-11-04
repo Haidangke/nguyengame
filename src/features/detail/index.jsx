@@ -70,7 +70,7 @@ function Detail() {
             </div>
             <DetailJointDeveloper involved_companies={game?.involved_companies} />
             <DetailSimilar similar_games={game?.similar_games} />
-            <Comment id={id} />
+            <Comment gameId={id} />
         </div>
     )
 }
