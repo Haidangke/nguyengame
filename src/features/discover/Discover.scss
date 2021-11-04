@@ -1,0 +1,7 @@
+@import "styles/_mixin.scss";
+.discover {
+    overflow: hidden;
+    @include mobile {
+        margin-top: 16px;
+    }
+}

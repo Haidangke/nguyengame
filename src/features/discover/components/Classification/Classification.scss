@@ -1,0 +1,76 @@
+@import "styles/_mixin.scss";
+
+.classification {
+    margin-top: 40px;
+    &-wrapper {
+        border-right: 1px solid var(--background-color1);
+    }
+    &-title {
+        margin-bottom: 28px;
+        color: var(--theme-color-oppose);
+        font-size: 1.6rem;
+    }
+    &-list {
+        margin-left: 18px;
+    }
+    &-item {
+        color: var(--color-theme-oppose);
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: var(--transition-base);
+    }
+    &-item:hover {
+        filter: brightness(115%);
+    }
+    &-item__image {
+        width: 48px;
+        min-width: 48px;
+        max-width: 48px;
+        height: 64px;
+        margin-right: 16px;
+    }
+    &-item__image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+    &-item__info {
+        width: 100%;
+        line-height: 1.5;
+        color: var(--transition-base);
+    }
+    &-item__name {
+        font-size: 1.4rem;
+    }
+
+    &-item__platform {
+        font-size: 1.4rem;
+        color: var(--text-color3);
+    }
+
+    &-item__image--loading {
+        background: var(--background-loading);
+    }
+
+    &-item__name--loading,
+    &-item__platform--loading {
+        background: var(--background-loading);
+        height: 15px;
+        margin: 5px 0;
+    }
+    &-item__name--loading {
+        width: 60%;
+    }
+    &-item__platform--loading {
+        width: 30%;
+    }
+
+    @include mobile {
+        &-item__info {
+            padding-right: 20px;
+        }
+    }
+}

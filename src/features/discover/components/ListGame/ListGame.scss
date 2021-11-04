@@ -1,0 +1,106 @@
+@import "styles/_mixin.scss";
+
+.game {
+    margin-top: 55px;
+    &-list {
+    }
+    &-item {
+        cursor: pointer;
+        transition: var(--transition-base);
+    }
+    &-item:hover {
+        filter: brightness(115%);
+    }
+
+    &-item__image {
+        min-height: 210px;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+        padding-bottom: calc(4 / 3 * 100%);
+    }
+    &-item__image--loading {
+        background: var(--background-loading);
+    }
+
+    &-item__image img,
+    &-item__image-img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @include image(100%, 100%);
+    }
+    &-info {
+        margin-top: 30px;
+    }
+    &-info__name {
+        min-height: 14px;
+        color: var(--color-theme-oppose);
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        @include text-overflow(1);
+        letter-spacing: 0.05rem;
+        font-weight: 500;
+    }
+
+    &-info__name--loading {
+        height: 16px;
+        background: var(--background-loading);
+    }
+
+    &-info__platforms,
+    &-info__genres,
+    &-info__developer {
+        display: flex;
+        overflow: hidden;
+        min-height: 14px;
+        line-height: 1.2;
+        margin-top: 10px;
+
+        font-size: 1.4rem;
+        color: var(--text-color2);
+
+        @include text-overflow(1);
+    }
+
+    &-info__platforms--loading,
+    &-info__genres--loading,
+    &-info__developer--loading {
+        background: var(--background-loading);
+    }
+
+    &-info__platforms--loading {
+        width: 80%;
+    }
+    &-info__developer--loading {
+        width: 70%;
+    }
+    &-info__genres--loading {
+        width: 50%;
+    }
+
+    &-info__platforms {
+        color: var(--text-color1);
+    }
+
+    &-info__developer {
+        color: var(--text-color2);
+        font-size: 1.3rem;
+    }
+
+    &-info__genres {
+        font-size: 1.2rem;
+        min-height: 10px;
+        color: var(--text-color3);
+        &--loading {
+            height: 10px;
+        }
+    }
+
+    @include mobile {
+        &-info__name {
+            line-height: 1.5;
+        }
+    }
+}

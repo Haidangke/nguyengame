@@ -1,0 +1,124 @@
+@import "styles/_mixin";
+.login {
+    @include flex(center, center);
+    max-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    &-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    &-background__image {
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &-background__overplay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 2;
+    }
+    &-wrapper {
+        position: relative;
+        width: 470px;
+        height: 90%;
+        padding: 40px 28px;
+        background-color: var(--background-color2-5);
+        z-index: 3;
+    }
+    &-logo {
+        margin: 0 auto;
+        width: 45px;
+        height: 45px;
+    }
+    &-logo svg {
+        width: 100%;
+        height: 100%;
+        color: var(--color-theme-oppose);
+    }
+    &-title {
+        line-height: 1.5;
+        margin: 30px 0 50px 0;
+        color: var(--color-theme-oppose);
+        font-size: 2.2rem;
+        font-weight: 600;
+        letter-spacing: 0.05rem;
+        text-align: center;
+    }
+    &-item {
+        display: flex;
+        height: 46px;
+        margin: 20px 0;
+        border-radius: 4px;
+        overflow: hidden;
+        transition: var(--transition-base);
+        cursor: pointer;
+    }
+    &-item__image {
+        flex-basis: 85px;
+        @include flex(center, center);
+        background-color: var(--color-theme-oppose);
+    }
+    &-item__image svg {
+        width: 20px;
+        height: 20px;
+    }
+    &-item__describe {
+        flex: 1;
+        height: 100%;
+        line-height: 46px;
+
+        background-color: var(--background-color1);
+        color: var(--color-theme-oppose);
+
+        letter-spacing: 0.05rem;
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    &-footer {
+        position: absolute;
+        bottom: 40px;
+        left: 0;
+
+        width: 100%;
+        text-align: center;
+        text-decoration: underline;
+    }
+    &-footer a {
+        font-size: 1.2rem;
+        color: var(--color-theme-oppose);
+    }
+
+    @include pc {
+        &-item:hover {
+            opacity: 0.9;
+        }
+    }
+
+    @include mobile {
+        align-items: flex-start;
+        &-wrapper {
+            max-width: 86%;
+            height: 650px;
+
+            margin-top: 40px;
+        }
+        &-item:active {
+            opacity: 0.9;
+        }
+
+        &-item__image {
+            flex-basis: 60px;
+        }
+    }
+}

@@ -1,0 +1,53 @@
+body[data-theme="light"] {
+    --color-theme: #ffffff;
+    --color-theme-oppose: #000000;
+
+    --background-color1: #c2c2c2;
+    --background-color2: #d5d5d5;
+    --background-color2-5: rgb(225, 225, 225);
+    --background-color3: #ededed;
+    --background-color4: #ffffff;
+
+    --text-color1: #0a0a0a;
+    --text-color2: #333333;
+    --text-color3: #5a5a5a;
+
+    --background-loading: #dfdfdf;
+    --linear-gradient: #ffffff4d;
+
+    --background-comment: rgb(242, 243, 245);
+
+    --primary-color: #007dfc;
+
+    --box-shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+body[data-theme="dark"] {
+    --color-theme: #000000;
+    --color-theme-oppose: #ffffff;
+
+    --background-color1: #3d3d3d;
+    --background-color2: rgb(42, 42, 42);
+    --background-color2-5: rgb(30, 30, 30);
+    --background-color3: rgb(18, 18, 18);
+    --background-color4: #000000;
+
+    --text-color1: #f5f5f5;
+    --text-color2: #cccccc;
+    --text-color3: #a5a5a5;
+
+    --background-loading: #202020;
+
+    --linear-gradient: #000000cc;
+    --background-comment: #2a2a2a;
+
+    --primary-color: #2290ff;
+    --box-shadow-color: rgba(255, 255, 255, 0.2);
+}
+
+:root {
+    --font-second: "Open Sans", sans-serif;
+    --transition-base: all 0.2s ease-in-out;
+
+    --white-color: #fff;
+}

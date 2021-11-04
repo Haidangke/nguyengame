@@ -1,0 +1,37 @@
+@import "styles/_mixin.scss";
+.game-artworks {
+    margin-top: 55px;
+    &-list {
+        // display: flex;
+        // gap: 30px;
+    }
+    &-item {
+        // flex: 1;
+        cursor: pointer;
+        transition: var(--transition-base);
+    }
+    &-item:hover {
+        filter: brightness(105%);
+    }
+
+    &-item__image {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    &-item__image img {
+        @include image(100%, 330px);
+    }
+
+    &-item__image--loading {
+        background: var(--background-loading);
+        @include image(100%, 330px);
+    }
+
+    @include mobile {
+        &-item__image img,
+        &-item__image--loading {
+            @include image(100%, auto);
+        }
+    }
+}

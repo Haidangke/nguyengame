@@ -1,0 +1,85 @@
+@import "styles/_mixin.scss";
+.topbar {
+    position: fixed;
+    top: 52px;
+    left: 50%;
+
+    height: 74px;
+    width: 100%;
+
+    background-color: var(--background-color3);
+    z-index: 3;
+    transform: translateX(-50%);
+
+    &-wrapper {
+        @include flex(center, space-between);
+        max-width: 1200px;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+    }
+    &-menu {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    &-item {
+        color: var(--text-color3);
+        font-weight: 500;
+        font-size: 1.4rem;
+        transition: var(--transition-base);
+    }
+
+    &-tool {
+        display: flex;
+        height: 100%;
+        align-items: center;
+    }
+
+    &-back {
+        display: flex;
+        padding: 0 20px 0 0;
+        margin-right: 20px;
+        color: var(--text-color3);
+        border-right: 2px solid var(--text-color3);
+        cursor: pointer;
+        span,
+        svg {
+            transition: var(--transition-base);
+            font-size: 1.4rem;
+        }
+        svg {
+            margin-right: 10px;
+        }
+
+        &:hover {
+            color: var(--color-theme-oppose);
+        }
+    }
+    &-name {
+        font-size: 1.4rem;
+        color: var(--color-theme-oppose);
+    }
+
+    @include mobile {
+        &-wrapper {
+            position: relative;
+            justify-content: space-between;
+            margin-left: 20px;
+        }
+
+        &-back > span {
+            display: none;
+        }
+
+        &-back > svg {
+            margin-right: 0;
+            font-size: 2rem;
+        }
+
+    }
+}
+
+.active {
+    color: var(--color-theme-oppose);
+}

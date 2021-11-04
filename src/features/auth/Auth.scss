@@ -1,0 +1,90 @@
+@import "styles/_mixin.scss";
+@keyframes fadeInPopupAuth {
+    from {
+        top: 100%;
+        opacity: 0.6;
+    }
+    to {
+        top: 120%;
+        opacity: 1;
+    }
+}
+
+.auth {
+    &-login {
+        padding: 0 20px;
+        height: 52px;
+        @include flex(center, center);
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04rem;
+        font-weight: 500;
+    }
+    &-avatar {
+        position: relative;
+        height: 36px;
+        width: 36px;
+        margin-right: 18px;
+    }
+
+    &-avatar__image {
+        width: 100%;
+        height: 100%;
+        border-radius: 50px;
+    }
+
+    &-popover {
+        position: absolute;
+        right: 0;
+        top: 120%;
+        min-width: 230px;
+        padding: 8px 24px;
+        box-shadow: 0 -4px 32px var(--background-color2-5);
+        background-color: var(--background-color2-5);
+        border-radius: 8px;
+        animation-name: fadeInPopupAuth;
+        animation-duration: 0.4s;
+        &__info {
+            @include flex(center, none);
+            height: 70px;
+            margin-bottom: 10px;
+        }
+        &__info-image {
+            height: 50px;
+            width: 50px;
+            border-radius: 50px;
+        }
+        &__info-name {
+            margin-left: 10px;
+            font-size: 1.4rem;
+            color: var(--color-theme-oppose);
+        }
+        &__list {
+            padding: 10px 0;
+            border-top: 1px solid var(--background-color1);
+        }
+        &__list-item {
+            font-size: 1.3rem;
+            padding: 10px 0;
+            color: var(--text-color2);
+            cursor: pointer;
+            transition: var(--transition-base);
+            &:hover {
+                color: var(--color-theme-oppose);
+            }
+            &:active {
+            }
+        }
+    }
+
+    @include mobile {
+        &-avatar {
+            position: relative;
+            height: 30px;
+            width: 30px;
+            margin-right: 8px;
+        }
+    }
+}

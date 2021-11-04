@@ -1,0 +1,25 @@
+@import "styles/mixin";
+
+.wrapper {
+    width: 100%;
+    background-color: var(--color-theme);
+    position: relative;
+}
+
+.container {
+    padding-top: 130px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@include mobile {
+    .app {
+        overflow: hidden;
+    }
+    .wrapper {
+        overflow: hidden;
+    }
+    .container {
+        margin: 0 18px;
+    }
+}
