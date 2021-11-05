@@ -12,11 +12,13 @@
 
 .auth {
     &-login {
-        padding: 0 20px;
-        height: 52px;
         @include flex(center, center);
+        height: 52px;
+        padding: 0 20px;
+
         background-color: var(--primary-color);
         color: var(--white-color);
+
         font-size: 1.2rem;
         text-transform: uppercase;
         letter-spacing: 0.04rem;

@@ -3,14 +3,14 @@ import Topbar from "features/topbar";
 import Comment from "features/comment";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import DetailBackground from "./components/DetailBackground";
-import DetailBanner from "./components/DetailBanner";
-import DetailClassification from "./components/DetailClassification";
-import DetailDescribe from "./components/DetailDescribe";
-import DetailInfo from "./components/DetailInfo";
-import DetailJointDeveloper from "./components/DetailJointDeveloper";
-import DetailSimilar from "./components/DetailSimilar";
-import DetailWebsite from "./components/DetailWebsite";
+import DetailBackground from "./components/Background";
+import DetailBanner from "./components/Banner";
+import DetailClassification from "./components/Classification";
+import DetailDescribe from "./components/Describe";
+import DetailInfo from "./components/Info";
+import DetailJointDeveloper from "./components/JointDeveloper";
+import DetailSimilar from "./components/Similar";
+import DetailWebsite from "./components/Website";
 import "./Detail.scss";
 
 

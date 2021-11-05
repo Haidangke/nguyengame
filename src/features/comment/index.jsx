@@ -1,11 +1,10 @@
 import { db } from 'Firebase/config';
 import React, { useEffect, useState } from 'react';
 import "./Comment.scss";
-import CommentContainer from './components/CommentContainer';
-import CommentMe from './components/CommentMe';
-import InputCommentReply from './components/InputCommentReply';
-import ListCommentReply from './components/ListCommentReply';
-
+import CommentInfo from './components/Info';
+import CommentUser from './components/User';
+import CommentInputReply from './components/InputReply';
+import CommentListReply from './components/ListReply';
 
 function Comment({ gameId }) {
     const [totalComment, setTotalComment] = useState(0);
@@ -37,7 +36,7 @@ function Comment({ gameId }) {
     return (
         <div className="comment">
             <div className="comment-heading">{totalComment} bình luận</div>
-            <CommentMe gameId={gameId} />
+            <CommentUser gameId={gameId} />
 
             <div className="comment-main">
                 {listCommentFrist.map(commentFirst => (
@@ -45,15 +44,15 @@ function Comment({ gameId }) {
                         <div className="comment-item">
                             <div className="comment-item__container">
                                 <img className="comment-item__avatar" src={commentFirst.photoURL} alt="avatar" />
-                                <CommentContainer comment={commentFirst} />
+                                <CommentInfo comment={commentFirst} />
                             </div>
-                            <InputCommentReply
+                            <CommentInputReply
                                 gameId={gameId}
                                 comment={commentFirst}
                                 commentFirst={commentFirst}
                             />
                         </div>
-                        <ListCommentReply
+                        <CommentListReply
                             gameId={gameId}
                             comment={commentFirst}
                             commentFirst={commentFirst}

@@ -2,12 +2,12 @@ import { resetFilter } from 'features/browse/browseSlice';
 import React, { Fragment, useState } from 'react';
 import { BsFilterLeft } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
-import GameModeFilter from './GameModeFilter';
-import GenresFilter from './GenresFilter';
-import PlatformsFilter from './PlatformsFilter';
-import TitleFilter from './TitleFilter';
+import GameModeFilter from './GameMode';
+import GenresFilter from './Genres';
+import PlatformsFilter from './Platforms';
+import TitleFilter from './Title';
 
-function BrowserFilter() {
+export default function BrowserFilter() {
     const dispatch = useDispatch();
     const [isFilterMobile, setIsFilterMobile] = useState(false);
     const handleResetFilter = () => dispatch(resetFilter());
@@ -23,8 +23,7 @@ function BrowserFilter() {
                 className="browse-filter__mobile"
                 onClick={() => setIsFilterMobile(true)}
             >
-                Filter
-                <BsFilterLeft />
+                Filter <BsFilterLeft />
             </div>
             <div className={`browse-filter ${isFilterMobile && 'browse-filter--mobile'}`}>
                 <div className="browse-filter__list">
@@ -41,5 +40,3 @@ function BrowserFilter() {
         </Fragment>
     );
 }
-
-export default BrowserFilter;

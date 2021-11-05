@@ -5,8 +5,8 @@ import { BiPlay } from 'react-icons/bi';
 import ReactPlayer from 'react-player/youtube';
 import SwiperCore, { Navigation, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from "swiper/react";
-import "./DetailBanner.scss";
-import DetailBannerLoading from "./DetailBannerLoading";
+import "./Banner.scss";
+import DetailBannerLoading from "./BannerLoading";
 
 
 function DetailBanner({ screenshots, videos, loading, id }) {

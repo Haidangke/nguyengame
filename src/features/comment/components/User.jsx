@@ -1,7 +1,7 @@
 import cmtApi from 'apis/cmtApi';
 import React, { useEffect, useState } from 'react';
 
-function CommentMe({ gameId }) {
+function CommentUser({ gameId }) {
     const [comment, setComment] = useState("");
     const user = JSON.parse(localStorage.getItem('user'));
     const photoURL = user?.photoURL;
@@ -51,4 +51,4 @@ function CommentMe({ gameId }) {
     );
 }
 
-export default CommentMe;
+export default CommentUser;

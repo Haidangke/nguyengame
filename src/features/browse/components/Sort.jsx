@@ -14,7 +14,6 @@ function BrowseSort() {
     const browseRef = useRef();
 
     const handleSortrBowse = (valueSort, nameSort) => {
-        console.log('dispatch')
         dispatch(setFilter({
             ...reference,
             sort: valueSort

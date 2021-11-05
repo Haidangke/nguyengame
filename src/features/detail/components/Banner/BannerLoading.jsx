@@ -1,7 +1,7 @@
 import useDeclareArray from "hooks/useDeclareArray";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "./DetailBanner.scss";
+import "./Banner.scss";
 import "swiper/swiper.scss";
 
 function DetailBannerLoading() {

@@ -1,10 +1,10 @@
 import { db } from 'Firebase/config';
 import React, { useEffect, useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import CommentContainer from './CommentContainer';
-import InputCommentReply from './InputCommentReply';
+import CommentContainer from './Info';
+import InputCommentReply from './InputReply';
 
-function ListCommentReply({ comment, gameId, commentFirst }) {
+function CommentListReply({ comment, gameId, commentFirst }) {
     const roomId = comment.roomId;
     const [isCmtsReply, setIsCmtReply] = useState(false);
     const [listCommentReply, setListCommentReply] = useState([]);
@@ -63,4 +63,4 @@ function ListCommentReply({ comment, gameId, commentFirst }) {
     );
 }
 
-export default ListCommentReply;
+export default CommentListReply;

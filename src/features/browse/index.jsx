@@ -1,8 +1,8 @@
 import React from 'react';
 import "./Browse.scss";
-import BrowseListGame from './components/BrowseGame';
-import BrowseSort from './components/BrowseSort';
-import BrowseToTop from './components/BrowseToTop';
+import BrowseListGame from './components/ListGame';
+import BrowseSort from './components/Sort';
+import BrowseToTop from './components/ButtonToTop';
 import BrowserFilter from './components/Filter';
 
 function Browse() {

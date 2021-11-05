@@ -2,9 +2,9 @@ import cmtApi from 'apis/cmtApi';
 import notifyApi from 'apis/notifyApi';
 import React, { Fragment, useEffect, useState } from 'react';
 import formatDate from 'utils/formatTime';
-import LikeComment from './LikeComment';
+import LikeComment from './Like';
 
-function InputCommentReply({ gameId, comment, commentFirst }) {
+function CommentInputReply({ gameId, comment, commentFirst }) {
     const user = JSON.parse(localStorage.getItem('user'));
     const userId = user?.userId;
     const displayName = user?.displayName;
@@ -92,4 +92,4 @@ function InputCommentReply({ gameId, comment, commentFirst }) {
     );
 }
 
-export default InputCommentReply;
+export default CommentInputReply;

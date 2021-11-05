@@ -2,14 +2,11 @@ import firebase, { auth, db } from "Firebase/config";
 import React from 'react';
 import { FcGoogle } from "react-icons/fc";
 import { SiNintendogamecube } from "react-icons/si";
-import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { setUser } from '../authSlice';
 import "./Login.scss";
 
-function Login() {
+export default function Login() {
     const history = useHistory();
-    const dispatch = useDispatch();
 
     const handleLoginWithEmail = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -20,7 +17,6 @@ function Login() {
                 const { email, displayName, photoURL } = userInfo;
                 const user = { email, displayName, photoURL, userId };
 
-                dispatch(setUser(user));
                 localStorage.setItem('user', JSON.stringify(user));
                 history.push("/");
 
@@ -72,5 +68,3 @@ function Login() {
         </div>
     );
 }
-
-export default Login;

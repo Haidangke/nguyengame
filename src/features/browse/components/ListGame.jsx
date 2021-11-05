@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import ReactLoading from 'react-loading';
 import { useInfiniteQuery } from 'react-query';
 import { useSelector } from 'react-redux';
-import BrowseGameLoading from './BrowseGameLoading';
+import BrowseGameLoading from './ListGameLoading';
 
 function BrowseGame() {
     const {

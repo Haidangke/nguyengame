@@ -1,7 +1,7 @@
 import { getImage } from "apis/apiConfig";
 import { toDate } from "date-fns";
 import React, { Fragment } from "react";
-import DetailInfoLoading from "./DetailInfoLoading";
+import DetailInfoLoading from "./InfoLoading";
 
 function DetailInfo({ game, loading }) {
     const releaseDate = game?.first_release_date && toDate(game?.first_release_date * 1000).toLocaleDateString()

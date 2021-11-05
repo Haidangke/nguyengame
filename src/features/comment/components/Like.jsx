@@ -3,7 +3,7 @@ import notifyApi from 'apis/notifyApi';
 import firebase, { db } from 'Firebase/config';
 import React, { useState } from 'react';
 import ReactLoading from 'react-loading';
-function LikeComment({ comment, gameId }) {
+function CommentLike({ comment, gameId }) {
     const user = JSON.parse(localStorage.getItem('user'));
     const userId = user?.userId;
     const displayName = user?.displayName;
@@ -47,4 +47,4 @@ function LikeComment({ comment, gameId }) {
     );
 }
 
-export default LikeComment;
+export default CommentLike;

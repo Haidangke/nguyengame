@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiTwotoneLike } from 'react-icons/ai';
 
-function CommentContainer({ comment }) {
+function CommentInfo({ comment }) {
     return (
         <div className="comment-item__info">
             <div className="comment-item__container-name">
@@ -20,4 +20,4 @@ function CommentContainer({ comment }) {
     );
 }
 
-export default CommentContainer;
+export default CommentInfo;
