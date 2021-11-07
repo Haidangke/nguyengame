@@ -1,13 +1,12 @@
+import { encode as base64_encode } from 'base-64';
 import firebase, { auth, db } from "Firebase/config";
 import React from 'react';
 import { FcGoogle } from "react-icons/fc";
 import { SiNintendogamecube } from "react-icons/si";
 import { Link, useHistory } from 'react-router-dom';
 import "./Login.scss";
-
-export default function Login() {
+function Login() {
     const history = useHistory();
-
     const handleLoginWithEmail = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider)
@@ -17,7 +16,9 @@ export default function Login() {
                 const { email, displayName, photoURL } = userInfo;
                 const user = { email, displayName, photoURL, userId };
 
-                localStorage.setItem('user', JSON.stringify(user));
+                const keyEncode = base64_encode('user');
+
+                localStorage.setItem(keyEncode, JSON.stringify(user));
                 history.push("/");
 
                 const isNewUser = res.additionalUserInfo.isNewUser;
@@ -43,11 +44,11 @@ export default function Login() {
             </div>
 
             <div className="login-wrapper">
-                <div className="login-logo">
-                    <SiNintendogamecube />
-                </div>
                 <div className="login-title">
                     Đăng nhập vào Nguyenke Games
+                </div>
+                <div className="login-logo">
+                    <SiNintendogamecube />
                 </div>
                 <div className="login-list">
                     <div className="login-item" onClick={handleLoginWithEmail}>
@@ -68,3 +69,5 @@ export default function Login() {
         </div>
     );
 }
+
+export default Login;

@@ -31,14 +31,15 @@
         position: relative;
         width: 470px;
         height: 90%;
-        padding: 40px 28px;
+        padding: 24px;
         background-color: var(--background-color2-5);
         z-index: 3;
     }
     &-logo {
         margin: 0 auto;
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
+        margin-top: 40px;
     }
     &-logo svg {
         width: 100%;
@@ -47,7 +48,7 @@
     }
     &-title {
         line-height: 1.5;
-        margin: 30px 0 50px 0;
+        margin: 30px 0;
         color: var(--color-theme-oppose);
         font-size: 2.2rem;
         font-weight: 600;
@@ -62,11 +63,11 @@
         overflow: hidden;
         transition: var(--transition-base);
         cursor: pointer;
+        background-color: var(--background-color3);
     }
     &-item__image {
         flex-basis: 85px;
         @include flex(center, center);
-        background-color: var(--color-theme-oppose);
     }
     &-item__image svg {
         width: 20px;
@@ -76,12 +77,12 @@
         flex: 1;
         height: 100%;
         line-height: 46px;
+        margin-right: 46px;
 
-        background-color: var(--background-color1);
         color: var(--color-theme-oppose);
 
         letter-spacing: 0.05rem;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         text-align: center;
     }
 
@@ -108,17 +109,33 @@
     @include mobile {
         align-items: flex-start;
         &-wrapper {
-            max-width: 86%;
+            max-width: 80%;
             height: 650px;
 
             margin-top: 40px;
+        }
+        &-logo {
+            margin: 0 auto;
+            margin-top: 40px;
+            width: 30px;
+            height: 30px;
+        } 
+        &-title {
+            margin: 20px 0;
+            font-size: 1.8rem;
+            font-weight: 500;
         }
         &-item:active {
             opacity: 0.9;
         }
 
         &-item__image {
-            flex-basis: 60px;
+            flex-basis: 50px;
+        }
+
+        &-item__describe {
+            margin-right: 0;
+            font-size: 1.4rem;
         }
     }
 }

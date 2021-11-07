@@ -4,9 +4,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 import "./Auth.scss";
 import AuthPopover from "./components/Popover";
+import { encode as base64_decode } from 'base-64';
 
 function Auth() {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem(base64_decode('user'))));
     const [isPoppver, setIsPopover] = useState(false);
     const authRef = useRef();
 

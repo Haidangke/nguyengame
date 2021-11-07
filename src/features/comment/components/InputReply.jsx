@@ -34,6 +34,7 @@ function CommentInputReply({ gameId, comment, commentFirst }) {
                 receiver: receiverId,
                 address: `/detail/${gameId}`,
                 content: `<span>${displayName}</span>đã nhắc tới bạn trong một bình luận`,
+                commentId: comment.id
             }, { sender: userId, senderPhoto: photoURL });
         };
         setCmtReply("");

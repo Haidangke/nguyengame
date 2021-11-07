@@ -4,10 +4,11 @@ import firebase, { db } from 'Firebase/config';
 import useUser from 'hooks/useUser';
 import React, { useState } from 'react';
 import ReactLoading from 'react-loading';
+
 function CommentLike({ comment, gameId }) {
     const { userId, photoURL, displayName } = useUser();
-
     const [loadingLike, setLoadingLike] = useState(false);
+
     const handleLike = async () => {
         if (loadingLike) return;
 
@@ -29,6 +30,7 @@ function CommentLike({ comment, gameId }) {
                     receiver: comment.userId,
                     receiverPhoto: comment.photoURL,
                     address: `/detail/${gameId}`,
+                    commentId: comment.id,
                     content: `<span>${displayName}</span>đã thích bình luận của bạn`,
                 }, { sender: userId, senderPhoto: photoURL });
             };
