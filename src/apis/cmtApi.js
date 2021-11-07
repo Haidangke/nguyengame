@@ -1,23 +1,16 @@
 import firebase, { db } from "Firebase/config";
 import { v4 as uuidv4 } from 'uuid';
 
-const user = JSON.parse(localStorage.getItem('user'));
-const userId = user?.userId;
-const displayName = user?.displayName;
-const photoURL = user?.photoURL;
-
 const cmtApi = {
-    addCmt(comment) {
+    addCmt(comment, user) {
         return db.collection('comments').add({
-            userId,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             roomId: uuidv4(),
-            displayName,
-            photoURL,
             like: 0,
             likes: [],
             ...comment,
-        });
+            ...user
+        })
     },
     increaseCmt(idGame, proterty) {
         return db.collection('comments')
@@ -30,6 +23,22 @@ const cmtApi = {
             .doc(idGame)
             .update({ [proterty]: firebase.firestore.FieldValue.increment(-1) });
     },
+
+    increaseTotalCmt(gameId) {
+        return db.collection("quantityCmt").doc(gameId).get().then(doc => {
+            if (!doc.exists) {
+                db.collection("quantityCmt").doc(gameId).set({
+                    gameId,
+                    quantity: 1
+                })
+
+            } else {
+                db.collection("quantityCmt").doc(gameId).update({
+                    quantity: firebase.firestore.FieldValue.increment(1)
+                });
+            }
+        })
+    }
 
 }
 

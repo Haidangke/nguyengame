@@ -1,12 +1,11 @@
 import cmtApi from 'apis/cmtApi';
 import notifyApi from 'apis/notifyApi';
 import firebase, { db } from 'Firebase/config';
+import useUser from 'hooks/useUser';
 import React, { useState } from 'react';
 import ReactLoading from 'react-loading';
 function CommentLike({ comment, gameId }) {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const userId = user?.userId;
-    const displayName = user?.displayName;
+    const { userId, photoURL, displayName } = useUser();
 
     const [loadingLike, setLoadingLike] = useState(false);
     const handleLike = async () => {
@@ -25,13 +24,13 @@ function CommentLike({ comment, gameId }) {
             });
             await cmtApi.increaseCmt(comment.id, "like");
 
-            if (comment.id !== userId) {
+            if (comment.userId.trim() !== userId.trim()) {
                 await notifyApi.addNotify({
                     receiver: comment.userId,
                     receiverPhoto: comment.photoURL,
                     address: `/detail/${gameId}`,
                     content: `<span>${displayName}</span>đã thích bình luận của bạn`,
-                });
+                }, { sender: userId, senderPhoto: photoURL });
             };
         }
         setLoadingLike(false);

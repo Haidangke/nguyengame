@@ -1,14 +1,44 @@
-import React, { useState } from 'react';
-import { IoNotificationsCircle } from "react-icons/io5";
+import { db } from 'Firebase/config';
+import useOnClickOutside from 'hooks/useOnClickOutside';
+import useUser from 'hooks/useUser';
+import React, { useEffect, useRef, useState } from 'react';
+import { IoMdNotifications } from "react-icons/io";
+import { Link } from 'react-router-dom';
 import './Notify.scss';
 
 function Notify() {
+    const notifyRef = useRef();
     const [isNotifyPopup, setIsNotifyPopup] = useState(false);
-    const user = Boolean(JSON.parse(localStorage.getItem("user")));
+    const [listNotify, setListNotify] = useState([]);
+
+    const { userId, isLoggedIn } = useUser();
+
+    useOnClickOutside(notifyRef, () => setIsNotifyPopup(false));
+
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            const unsubcribe = db.collection("notifys")
+                .orderBy('createdAt', 'desc')
+                .where("receiver", "==", userId)
+                .onSnapshot((querySnapshot) => {
+                    const data = [];
+                    querySnapshot.forEach((doc) => {
+                        if (doc.exists) {
+                            data.push({ id: doc.id, ...doc.data() });
+                        }
+
+                    })
+                    setListNotify(data);
+                });
+            return unsubcribe;
+        }
+    }, [userId, isLoggedIn]);
+
     return (
-        <div className="notify">
+        isLoggedIn && <div ref={notifyRef} className="notify">
             <div className="notify-icon" onClick={() => setIsNotifyPopup(!isNotifyPopup)}>
-                <IoNotificationsCircle />
+                <IoMdNotifications />
             </div>
 
             {isNotifyPopup && <div className="notify-container">
@@ -16,41 +46,19 @@ function Notify() {
                     Thông báo
                 </div>
                 <div className="notify-list">
-                    <div className="notify-item">
-                        <img src="https://lh3.googleusercontent.com/a-/AOh14GhmE_6NEM5QnbbVq9UvGBmMUaT95RCFewozCMRyug=s96-c" alt="" className="notify-item__avatar" />
-                        <div className="notify-item__main">
-                            <div className="notify-item__content">
-                                Phương T đã nhắc tới bạn trong một bình luận.
-                            </div>
-                            <div className="notify-item__date">
-                                2 ngày trước
-                            </div>
-                        </div>
-                    </div>
+                    {listNotify.map(notify =>
+                        <Link to={notify?.address} key={notify.id} className="notify-item">
+                            <img src={notify?.senderPhoto} alt="" className="notify-item__avatar" />
+                            <div className="notify-item__main">
+                                <div className="notify-item__content" dangerouslySetInnerHTML={{ __html: notify?.content }}>
 
-                    <div className="notify-item">
-                        <img src="https://lh3.googleusercontent.com/a-/AOh14GhmE_6NEM5QnbbVq9UvGBmMUaT95RCFewozCMRyug=s96-c" alt="" className="notify-item__avatar" />
-                        <div className="notify-item__main">
-                            <div className="notify-item__content">
-                                Phương T đã nhắc tới bạn trong một bình luận.
+                                </div>
+                                <div className="notify-item__date">
+                                    2 ngày trước
+                                </div>
                             </div>
-                            <div className="notify-item__date">
-                                2 ngày trước
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="notify-item">
-                        <img src="https://lh3.googleusercontent.com/a-/AOh14GhmE_6NEM5QnbbVq9UvGBmMUaT95RCFewozCMRyug=s96-c" alt="" className="notify-item__avatar" />
-                        <div className="notify-item__main">
-                            <div className="notify-item__content">
-                                Phương T đã nhắc tới bạn trong một bình luận.
-                            </div>
-                            <div className="notify-item__date">
-                                2 ngày trước
-                            </div>
-                        </div>
-                    </div>
+                        </Link>
+                    )}
                 </div>
             </div>}
         </div>

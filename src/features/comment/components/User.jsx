@@ -1,20 +1,24 @@
 import cmtApi from 'apis/cmtApi';
+import useUser from 'hooks/useUser';
 import React, { useEffect, useState } from 'react';
 
 function CommentUser({ gameId }) {
     const [comment, setComment] = useState("");
-    const user = JSON.parse(localStorage.getItem('user'));
-    const photoURL = user?.photoURL;
+    const { userId, displayName, photoURL, isLoggedIn } = useUser();
 
-    const handleAddComment = () => {
-        if (!comment) return;
-        setComment("");
-        cmtApi.addCmt({
-            gameId,
-            content: comment,
-            isFirst: true,
-            quantity: 0
-        });
+    const handleAddComment = async () => {
+        if (comment) {
+            setComment("");
+            await cmtApi.addCmt({
+                gameId,
+                content: comment,
+                isFirst: true,
+                quantity: 0,
+            }, { userId, displayName, photoURL });
+
+            await cmtApi.increaseTotalCmt(gameId);
+        }
+
     }
 
     useEffect(() => {
@@ -22,7 +26,7 @@ function CommentUser({ gameId }) {
     }, [gameId]);
 
     return (
-        user ?
+        isLoggedIn ?
             <div className="comment-me">
                 <div className="comment-me__container">
                     <img src={photoURL} alt="avatar" className="comment-me__avatar" />
@@ -34,7 +38,7 @@ function CommentUser({ gameId }) {
                     />
                 </div>
                 <div className="comment-me__button">
-                    <div onChange={() => setComment("")} className="comment-me__button-cancel">
+                    <div onClick={() => setComment("")} className="comment-me__button-cancel">
                         Hủy
                     </div>
                     <div

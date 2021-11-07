@@ -11,11 +11,13 @@
 }
 .notify {
     position: relative;
-
+    &-icon {
+        @include flex(center, none);
+    }
     &-icon svg {
         margin-right: 18px;
         color: var(--color-theme-oppose);
-        font-size: 3rem;
+        font-size: 2.6rem;
     }
 
     &-container {
@@ -62,12 +64,21 @@
         font-size: 1.3rem;
         color: var(--text-color2);
     }
+    &-item__content > span {
+        font-size: 13px;
+        margin-right: 4px;
+        font-weight: 500;
+        color: var(--color-theme-oppose);
+    }
     &-item__date {
         font-size: 1.2rem;
         color: var(--text-color2);
     }
 
     @include mobile {
+        &-icon svg {
+            margin-right: 12px;
+        }
         &-container {
             position: fixed;
             top: 60px;

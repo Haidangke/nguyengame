@@ -11,26 +11,36 @@ function Comment({ gameId }) {
     const [listCommentFrist, setListCommentFirst] = useState([]);
 
     useEffect(() => {
-        setTotalComment(0);
         setListCommentFirst([]);
-
         const unsubcribe = db.collection("comments")
             .orderBy('createdAt', 'desc')
             .where("gameId", "==", gameId)
             .where("isFirst", "==", true)
+            .limit(10)
             .onSnapshot((querySnapshot) => {
                 const data = [];
                 querySnapshot.forEach((doc) => {
                     data.push({ id: doc.id, ...doc.data() });
                 })
                 setListCommentFirst(data);
-
-                const totalComment = data.reduce((a, b) => a + b.quantity + 1, 0);
-                setTotalComment(totalComment);
             });
 
         return unsubcribe;
     }, [gameId]);
+
+    useEffect(() => {
+        setTotalComment(0);
+        const unsubcribe = db.collection("quantityCmt")
+            .doc(gameId)
+            .onSnapshot(doc => {
+                if (doc.exists) {
+                    setTotalComment(doc.data().quantity);
+                } else {
+                    setTotalComment(0);
+                }
+            })
+        return unsubcribe;
+    }, [gameId])
 
 
     return (

@@ -31,8 +31,6 @@ function DetailInfo({ game, loading }) {
                 <div className="detail-right__table-item">
                     <span>Ngày ra mắt</span>
                     <span>{releaseDate}</span>
-                    {/* <span>{}</span> */}
-
                 </div>
                 <div className="detail-right__table-item">
                     <span>Thể loại</span>

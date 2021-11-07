@@ -1,34 +1,21 @@
 import cmtApi from 'apis/cmtApi';
 import notifyApi from 'apis/notifyApi';
+import useUser from 'hooks/useUser';
 import React, { Fragment, useEffect, useState } from 'react';
 import formatDate from 'utils/formatTime';
 import LikeComment from './Like';
 
 function CommentInputReply({ gameId, comment, commentFirst }) {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const userId = user?.userId;
-    const displayName = user?.displayName;
-    const photoURL = user?.photoURL;
+    const { photoURL, displayName, userId, isLoggedIn } = useUser();
 
     const [isInputReply, setIsInputReply] = useState(false);
     const [cmtReply, setCmtReply] = useState("");
 
     const handleReply = async () => {
         const cmtId = commentFirst.id;
-
         const roomId = comment.roomId;
         const receiverName = comment.displayName;
         const receiverId = comment.userId;
-        const receiverPhoto = comment.photoURL;
-
-        if (receiverId !== userId) {
-            await notifyApi.addNotify({
-                receiver: receiverId,
-                receiverPhoto,
-                address: `/detail/${gameId}`,
-                content: `<span>${displayName}</span>đã nhắc tới bạn trong một bình luận`,
-            });
-        };
 
         await cmtApi.addCmt({
             gameId,
@@ -36,9 +23,19 @@ function CommentInputReply({ gameId, comment, commentFirst }) {
             isFirst: false,
             roomId,
             receiver: receiverName !== displayName ? receiverName : ""
-        });
+        }, { userId, displayName, photoURL });
 
         await cmtApi.increaseCmt(cmtId, "quantity");
+
+        await cmtApi.increaseTotalCmt(gameId);
+
+        if (receiverId.trim() !== userId.trim()) {
+            await notifyApi.addNotify({
+                receiver: receiverId,
+                address: `/detail/${gameId}`,
+                content: `<span>${displayName}</span>đã nhắc tới bạn trong một bình luận`,
+            }, { sender: userId, senderPhoto: photoURL });
+        };
         setCmtReply("");
     };
 
@@ -51,7 +48,7 @@ function CommentInputReply({ gameId, comment, commentFirst }) {
     return (
         <Fragment>
             <div className="comment-item__features">
-                {user && <Fragment>
+                {isLoggedIn && <Fragment>
                     <LikeComment comment={comment} gameId={gameId} />
                     <div
                         onClick={() => setIsInputReply(!isInputReply)}

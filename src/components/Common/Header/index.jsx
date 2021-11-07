@@ -6,7 +6,6 @@ import React from "react";
 import { SiNintendogamecube } from "react-icons/si";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import "./Header.scss";
-import ThemeToggler from "./ThemeToggler";
 
 export default function Header() {
     const history = useHistory();
@@ -35,9 +34,6 @@ export default function Header() {
             </div>
             <div className="header-notify">
                 <Notify />
-            </div>
-            <div className="header-theme">
-                <ThemeToggler />
             </div>
             <div className="header-auth">
                 <Auth />

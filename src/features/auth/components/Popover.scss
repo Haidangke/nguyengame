@@ -1,0 +1,53 @@
+@import "styles/_mixin.scss";
+.auth-popover {
+    position: absolute;
+    right: 0;
+    top: 120%;
+    min-width: 230px;
+
+    padding: 8px 24px;
+    border-radius: 8px;
+
+    box-shadow: 0 -4px 32px var(--background-color2-5);
+    background-color: var(--background-color2-5);
+    animation-name: fadeInPopupAuth;
+    animation-duration: 0.4s;
+
+    &__info {
+        @include flex(center, none);
+        height: 70px;
+        margin-bottom: 10px;
+    }
+    &__info-image {
+        height: 50px;
+        width: 50px;
+        border-radius: 50px;
+    }
+    &__info-name {
+        margin-left: 10px;
+        color: var(--color-theme-oppose);
+        font-size: 1.4rem;
+    }
+    &__list {
+        padding: 10px 0;
+        border-top: 1px solid var(--background-color1);
+    }
+    &__list-item {
+        @include flex(center, space-between);
+        padding: 10px 0;
+        color: var(--text-color2);
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: var(--transition-base);
+
+        &:hover {
+            color: var(--color-theme-oppose);
+        }
+    }
+    &__list-item--them:hover {
+        color: var(--text-color2);
+    }
+    .css-1yjjitx-MuiSwitch-track {
+        background-color: var(--text-color2);
+    }
+}

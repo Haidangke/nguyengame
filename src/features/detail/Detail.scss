@@ -1,6 +1,7 @@
 @import "styles/_mixin.scss";
 
 .detail {
+    position: relative;
     &-background,
     &-background::after {
         position: absolute;
