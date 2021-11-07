@@ -5,7 +5,6 @@ import CommentInfo from './components/Info';
 import CommentUser from './components/User';
 import CommentInputReply from './components/InputReply';
 import CommentListReply from './components/ListReply';
-import { useSelector } from 'react-redux';
 
 function Comment({ gameId }) {
     const [totalComment, setTotalComment] = useState(0);
@@ -42,8 +41,6 @@ function Comment({ gameId }) {
             })
         return unsubcribe;
     }, [gameId])
-
-
 
     return (
         <div className="comment">

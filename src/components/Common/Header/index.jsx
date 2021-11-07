@@ -1,15 +1,17 @@
 
 import { linksHeader } from "config/links";
 import Auth from "features/auth";
-import Notify from "features/notify";
+import useUser from "hooks/useUser";
 import React from "react";
 import { SiNintendogamecube } from "react-icons/si";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import "./Header.scss";
+import ThemeToggler from "./ThemeToggle";
 
 export default function Header() {
     const history = useHistory();
     const { pathname } = useLocation();
+    const { isLoggedIn } = useUser();
     const indexActive = linksHeader.findIndex(item =>
         (item.path === pathname || (item.match && item.match.includes(pathname))));
 
@@ -32,9 +34,9 @@ export default function Header() {
                     </div>
                 ))}
             </div>
-            <div className="header-notify">
-                <Notify />
-            </div>
+            {!isLoggedIn && <div className="header-theme">
+                <ThemeToggler />
+            </div>}
             <div className="header-auth">
                 <Auth />
             </div>

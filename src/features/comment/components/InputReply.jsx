@@ -1,5 +1,4 @@
 import cmtApi from 'apis/cmtApi';
-import notifyApi from 'apis/notifyApi';
 import useUser from 'hooks/useUser';
 import React, { Fragment, useEffect, useState } from 'react';
 import formatDate from 'utils/formatTime';
@@ -15,7 +14,6 @@ function CommentInputReply({ gameId, comment, commentFirst }) {
         const cmtId = commentFirst.id;
         const roomId = comment.roomId;
         const receiverName = comment.displayName;
-        const receiverId = comment.userId;
 
         await cmtApi.addCmt({
             gameId,
@@ -29,14 +27,7 @@ function CommentInputReply({ gameId, comment, commentFirst }) {
 
         await cmtApi.increaseTotalCmt(gameId);
 
-        if (receiverId.trim() !== userId.trim()) {
-            await notifyApi.addNotify({
-                receiver: receiverId,
-                address: `/detail/${gameId}`,
-                content: `<span>${displayName}</span>đã nhắc tới bạn trong một bình luận`,
-                commentId: comment.id
-            }, { sender: userId, senderPhoto: photoURL });
-        };
+        
         setCmtReply("");
     };
 
