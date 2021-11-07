@@ -189,6 +189,9 @@
         min-width: 36px;
         max-width: 50px;
     }
+    &-item__features-like > div {
+        fill: var(--color-theme-oppose) !important;
+    }
     &-item__features-dates {
         font-size: 1.4rem;
         color: var(--text-color3);

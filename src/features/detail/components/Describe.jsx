@@ -51,7 +51,7 @@ function DetailDescribe({ game, id }) {
             </div>
 
 
-            {artworks && <div className="detail-button-show">
+            {(artworks || storyline) && <div className="detail-button-show">
                 {!isShow && <div className="detail-button-show__overplay"></div>}
                 <span onClick={handleShowDescribe}>
                     {!isShow ?

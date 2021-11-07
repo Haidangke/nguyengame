@@ -33,7 +33,7 @@ function CommentLike({ comment }) {
             onClick={handleLike}
             className={`comment-item__features-like ${comment?.likes?.includes(userId) && 'comment-item__features-like--active'}`}
         >
-            {loadingLike ? <ReactLoading type="spinningBubbles" color="white" width={20} height={20} /> : 'Thích'}
+            {loadingLike ? <ReactLoading type="spinningBubbles" width={20} height={20} /> : 'Thích'}
         </div>
     );
 }

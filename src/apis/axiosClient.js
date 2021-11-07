@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
+    // baseURL: `http://192.168.1.8:8080/https://api.igdb.com/v4`,
     baseURL: `${process.env.REACT_APP_SERVER_MIDDLEWARE}https://api.igdb.com/v4`,
     headers: {
         "Content-Type": "text/plain",

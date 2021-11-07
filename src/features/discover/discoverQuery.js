@@ -6,7 +6,7 @@ import randomArray from "utils/randomArray";
 const listIdMostPopular = randomArray([111469, 95340, 115, 2963, 17269, 131800, 27789, 127352, 45131, 154986, 121, 1905, 19560, 154986], 12);
 const listIdAppreciate = [7342, 14593, 22917, 37001, 1942, 20150, 121760, 113118, 119388, 7327, 11156];
 const listIdHero = randomArray([136981, 127343, 134588, 26855, 23314], 2);
-const listIdHeroTwo = randomArray([140839, 65503, 101869, 131687], 2);
+const listIdHeroTwo = randomArray([140839, 65503, 101869, 131687, 110474], 2);
 const listIdAdultGame = [139858, 138265, 34950, 75797, 34461, 57546, 17640];
 
 const fetchListMostPopular = async () =>

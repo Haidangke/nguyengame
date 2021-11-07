@@ -1,27 +1,27 @@
 {
-    "emulators": {
-        "auth": {
-            "port": 9099
-        },
-        "firestore": {
-            "port": 8081
-        },
-        "ui": {
-            "enabled": true
-        }
+  "emulators": {
+    "auth": {
+      "port": 9099
     },
-    "hosting": {
-        "public": "build",
-        "ignore": [
-            "firebase.json",
-            "**/.*",
-            "**/node_modules/**"
-        ],
-        "rewrites": [
-            {
-                "source": "**",
-                "destination": "/index.html"
-            }
-        ]
+    "firestore": {
+      "port": 8081
+    },
+    "ui": {
+      "enabled": true
     }
+  },
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }

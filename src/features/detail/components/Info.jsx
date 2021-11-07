@@ -1,7 +1,8 @@
 import { getImage } from "apis/apiConfig";
 import { toDate } from "date-fns";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import DetailInfoLoading from "./InfoLoading";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 function DetailInfo({ game, loading }) {
     const releaseDate = game?.first_release_date && toDate(game?.first_release_date * 1000).toLocaleDateString()
@@ -12,6 +13,51 @@ function DetailInfo({ game, loading }) {
 
     const genres = game?.genres?.map(x => x?.name).join(', ') || "Chưa có dữ liệu";
     const gameModes = game?.game_modes?.map(x => x?.name).join(', ') || "Chưa có dữ liệu";
+    const player_perspectives = game?.player_perspectives?.map(x => x?.name).join(', ') || "Chưa có dữ liệu";
+    const themes = game?.themes?.map(x => x?.name).join(', ') || "Chưa có dữ liệu";
+
+    const [listShow, setListShow] = useState([]);
+    const [listIsShow, setListIsShow] = useState([]);
+
+    const listInfo = [
+        { title: 'Nhà phát triển', value: developer },
+        { title: 'Nhà phát hành', value: publisher },
+        { title: 'Ngày ra mắt', value: releaseDate },
+        { title: 'Thể loại', value: genres },
+        { title: 'Chủ đề', value: themes },
+        { title: 'Chế độ chơi', value: gameModes },
+        { title: 'Nền tảng', value: platforms },
+        { title: 'Góc nhìn người chơi', value: player_perspectives }
+    ];
+
+    const handleOpenShow = (index) => {
+        console.log(index);
+        const curListIsShow = [...listIsShow];
+        curListIsShow[index] = true;
+        console.log(curListIsShow)
+        setListIsShow(curListIsShow);
+    }
+
+    const handleCLoseShow = (index) => {
+        console.log(index);
+        const curListIsShow = [...listIsShow];
+        curListIsShow[index] = false;
+        setListIsShow(curListIsShow);
+    }
+
+    useEffect(() => {
+        setListShow([
+            developer.length > 24,
+            publisher.length > 24,
+            false,
+            genres.length > 24,
+            themes.length > 24,
+            gameModes.length > 24,
+            platforms.length > 24,
+            player_perspectives.length > 24
+        ])
+    }, [developer, game, gameModes, genres, platforms, publisher, themes, player_perspectives]);
+
 
     return (
         loading ? <DetailInfoLoading /> : <Fragment>
@@ -20,30 +66,19 @@ function DetailInfo({ game, loading }) {
             </div>
 
             <div className="detail-right__table">
-                <div className="detail-right__table-item">
-                    <span>Nhà phát triển </span>
-                    <span>{developer}</span>
-                </div>
-                <div className="detail-right__table-item">
-                    <span>Nhà phát hành</span>
-                    <span>{publisher}</span>
-                </div>
-                <div className="detail-right__table-item">
-                    <span>Ngày ra mắt</span>
-                    <span>{releaseDate}</span>
-                </div>
-                <div className="detail-right__table-item">
-                    <span>Thể loại</span>
-                    <span>{genres}</span>
-                </div>
-                <div className="detail-right__table-item">
-                    <span>Chế độ chơi</span>
-                    <span>{gameModes}</span>
-                </div>
-                <div className="detail-right__table-item">
-                    <span>Nền tảng</span>
-                    <span>{platforms}</span>
-                </div>
+                {listInfo.map((info, index) =>
+                    <div
+                        key={info.title}
+                        className={`detail-right__table-item ${listShow[index] && 'detail-right__table-item--more'} ${listIsShow[index] && 'detail-right__table-item--show'}`}
+                    >
+                        <span>{info.title}</span>
+                        <span>{info.value}</span>
+                        {listShow[index] && (listIsShow[index]
+                            ? <IoIosArrowDown onClick={() => handleCLoseShow(index)} /> :
+                            <IoIosArrowUp onClick={() => handleOpenShow(index)} />)}
+
+                    </div>)
+                }
             </div>
         </Fragment>
     )

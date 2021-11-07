@@ -44,7 +44,7 @@ function BrowseGame() {
             sort,
             offset: 24 * pageParam
         }), {
-        getNextPageParam: lastPage => lastPage.length > 0 ?? false
+        getNextPageParam: lastPage => lastPage.length >= 24 ?? false
 
     });
 

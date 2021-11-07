@@ -2,6 +2,7 @@ import { encode as base64_encode } from 'base-64';
 import firebase, { auth, db } from "Firebase/config";
 import React from 'react';
 import { FcGoogle } from "react-icons/fc";
+import { FaFacebookF } from "react-icons/fa";
 import { SiNintendogamecube } from "react-icons/si";
 import { Link, useHistory } from 'react-router-dom';
 import "./Login.scss";
@@ -31,6 +32,8 @@ function Login() {
             })
     }
 
+    
+
     return (
         <div className="login">
 
@@ -59,6 +62,7 @@ function Login() {
                             Đăng nhập bằng Google
                         </div>
                     </div>
+
                 </div>
 
                 <div className="login-footer">

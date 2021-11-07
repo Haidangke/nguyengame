@@ -26,8 +26,8 @@
     }
     &-avatar {
         position: relative;
-        height: 30px;
-        width: 30px;
+        height: 32px;
+        width: 32px;
         margin-right: 18px;
     }
 
@@ -40,9 +40,6 @@
     @include mobile {
         &-avatar {
             position: relative;
-            height: 30px;
-            width: 30px;
-            margin-right: 8px;
         }
     }
 }
