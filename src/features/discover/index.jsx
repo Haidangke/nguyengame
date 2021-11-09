@@ -18,18 +18,20 @@ import {
     fetchListRating,
     fetchListRecentlyUpdated,
     fetchListTopFollows,
-    fetchListAdultGame
+    fetchListAdultGame,
+    fetchListUserLike
 } from './discoverQuery';
 
 
 export default function Discover() {
     useEffect(() => {
-        document.title = "Store Game"
+        document.title = "nguyengame";
     }, []);
 
     const listMostPopular = useQuery('listMostPopular', fetchListMostPopular);
     const listAppreciate = useQuery('listAppreciate', fetchListAppreciate);
     const listHero = useQuery('listHero', fetchListHero);
+    const listUserLike = useQuery('listUserLike', fetchListUserLike);
     const listRating = useQuery('listRating', fetchListRating);
     const listHeroTwo = useQuery('listHeroTwo', fetchListHeroTwo);
     const listRecentlyUpdated = useQuery('listRecentlyUpdated', fetchListRecentlyUpdated);
@@ -53,7 +55,8 @@ export default function Discover() {
             <ListGame listGame={listMostPopular} title="Game phổ biến nhất" main />
             <ListGame listGame={listAppreciate} title="Game có cốt truyện hay nhất" />
             <ListArtwork listGame={listHero} />
-            <ListGame listGame={listRating} title="top game theo điểm" />
+            <ListGame listGame={listUserLike} title="Game có thể bạn thích" />
+            <ListGame listGame={listRating} title="Game có điểm cao nhất" />
             <ListArtwork listGame={listHeroTwo} />
             <Classification classification={classification} />
             <ListGame listGame={listRecentlyUpdated} title="Game cập nhật gần đây" />

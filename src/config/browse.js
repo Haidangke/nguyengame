@@ -77,38 +77,19 @@ const genres = [
     }, {
         id: 13,
         name: "Giả lập"
-    }, 
-    // {
-    //     id: 15,
-    //     name: "Chiến lược"
-    // }, {
-    //     id: 16,
-    //     name: "Chiến lược theo lượt"
-    // }, 
+    },
     {
         id: 24,
         name: "Chiến thuật"
     },
-    //  {
-    //     id: 25,
-    //     name: "Cận chiến"
-    // }, 
     {
         id: 31,
         name: "Phiêu lưu"
     }, {
         id: 32,
         name: "Indie"
-    }, 
-    // {
-    //     id: 33,
-    //     name: "Giải trí"
-    // },
-    //  {
-    //     id: 34,
-    //     name: "Tiểu thuyết thực"
-    // },
-     {
+    },
+    {
         id: 35,
         name: "Thẻ bài"
     }, {
@@ -124,6 +105,10 @@ const listBrowseSort = [
     }, {
         name: 'Ra mắt lâu nhất',
         value: 'first_release_date asc'
+    }
+    , {
+        name: 'Điểm cao nhất',
+        value: 'rating desc'
     }
 ];
 

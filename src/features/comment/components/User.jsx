@@ -1,10 +1,10 @@
 import cmtApi from 'apis/cmtApi';
-import useUser from 'hooks/useUser';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function CommentUser({ gameId }) {
     const [comment, setComment] = useState("");
-    const { userId, displayName, photoURL, isLoggedIn } = useUser();
+    const { userId, displayName, photoURL, isLoggedIn } = useSelector(state => state.auth.user);
 
     const handleAddComment = async () => {
         if (comment) {

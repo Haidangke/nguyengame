@@ -1,4 +1,4 @@
-const getVideo = (id) => `https://youtu.be/${id}?enablejsapi=1&origin=http://localhost:3000`;
+const getVideo = (id) => `https://youtu.be/${id}`;
 
 const getBgVideo = (id) => `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
 

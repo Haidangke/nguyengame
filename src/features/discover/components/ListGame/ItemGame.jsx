@@ -4,7 +4,6 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import "./ListGame.scss";
 function ItemGame({ game }) {
-    
     const { onMobile } = useResize();
     const history = useHistory();
     const imageUrl = onMobile ? getImageLow(game?.cover?.image_id) : getImage(game?.cover?.image_id);

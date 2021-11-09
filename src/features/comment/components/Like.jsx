@@ -1,11 +1,11 @@
 import cmtApi from 'apis/cmtApi';
 import firebase, { db } from 'Firebase/config';
-import useUser from 'hooks/useUser';
 import React, { useState } from 'react';
 import ReactLoading from 'react-loading';
+import { useSelector } from 'react-redux';
 
 function CommentLike({ comment }) {
-    const { userId } = useUser();
+    const { userId } = useSelector(state => state.auth.user);
     const [loadingLike, setLoadingLike] = useState(false);
 
     const handleLike = async () => {

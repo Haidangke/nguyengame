@@ -1,4 +1,4 @@
-import { getBgVideo, getImage, getVideo } from "apis/apiConfig";
+import { getBgVideo, getImage, getImageLow, getVideo } from "apis/apiConfig";
 import useResize from "hooks/useResize";
 import React, { useEffect, useState } from "react";
 import { BiPlay } from 'react-icons/bi';
@@ -15,6 +15,8 @@ function DetailBanner({ screenshots, videos, loading, id }) {
     const SLIDE = onMobile ? 3 : 4;
     const [idxActive, setIdxActive] = useState(0);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+    const imageUrl = (url) => onMobile ? getImageLow(url) : getImage(url)
 
     useEffect(() => {
         setIdxActive(0);
@@ -48,7 +50,7 @@ function DetailBanner({ screenshots, videos, loading, id }) {
 
                         {screenshots && screenshots.map(screenshot => (
                             <SwiperSlide key={screenshot.id}>
-                                <img src={getImage(screenshot?.image_id)} alt="screenshot" />
+                                <img src={imageUrl(screenshot?.image_id)} alt="screenshot" />
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -75,7 +77,7 @@ function DetailBanner({ screenshots, videos, loading, id }) {
                         {screenshots && screenshots.map(screenshot => (
                             <SwiperSlide key={screenshot.id} >
                                 <div className="detail-banner__bottom-item" >
-                                    <img src={getImage(screenshot?.image_id)} alt="screenshot" />
+                                    <img src={imageUrl(screenshot?.image_id)} alt="screenshot" />
                                 </div>
                             </SwiperSlide>
                         ))}

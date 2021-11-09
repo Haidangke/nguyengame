@@ -1,11 +1,11 @@
 import cmtApi from 'apis/cmtApi';
-import useUser from 'hooks/useUser';
 import React, { Fragment, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import formatDate from 'utils/formatTime';
 import LikeComment from './Like';
 
 function CommentInputReply({ gameId, comment, commentFirst }) {
-    const { photoURL, displayName, userId, isLoggedIn } = useUser();
+    const { photoURL, displayName, userId, isLoggedIn } = useSelector(state => state.auth.user);
 
     const [isInputReply, setIsInputReply] = useState(false);
     const [cmtReply, setCmtReply] = useState("");
@@ -27,7 +27,7 @@ function CommentInputReply({ gameId, comment, commentFirst }) {
 
         await cmtApi.increaseTotalCmt(gameId);
 
-        
+
         setCmtReply("");
     };
 

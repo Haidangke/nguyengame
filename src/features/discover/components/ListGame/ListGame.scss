@@ -2,14 +2,9 @@
 
 .game {
     margin-top: 55px;
-    &-list {
-    }
     &-item {
         cursor: pointer;
         transition: var(--transition-base);
-    }
-    &-item:hover {
-        filter: brightness(115%);
     }
 
     &-item__image {
@@ -99,7 +94,16 @@
         }
     }
 
+    @include pc {
+        &-item:hover {
+            opacity: 0.9;
+        }
+    }
+
     @include mobile {
+        &-item:active {
+            opacity: 0.8;
+        }
         &-info__name {
             line-height: 1.5;
         }

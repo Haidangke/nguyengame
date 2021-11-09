@@ -20,6 +20,7 @@ function Search() {
     const searchRef = useRef();
 
     const handleResetSearch = () => {
+        setIsShow(false);
         dispatch(fetchDataSuccess([]));
         dispatch(setInput(""));
         setIsInputMobile(false);

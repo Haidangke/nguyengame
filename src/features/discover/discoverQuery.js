@@ -8,6 +8,7 @@ const listIdAppreciate = [7342, 14593, 22917, 37001, 1942, 20150, 121760, 113118
 const listIdHero = randomArray([136981, 127343, 134588, 26855, 23314], 2);
 const listIdHeroTwo = randomArray([140839, 65503, 101869, 131687, 110474], 2);
 const listIdAdultGame = [139858, 138265, 34950, 75797, 34461, 57546, 17640];
+const listIdUserLike = [55044, 5636, 5589, 120176, 114795, 39244];
 
 const fetchListMostPopular = async () =>
     await gameApi.getAllShort({
@@ -27,15 +28,18 @@ const fetchListHero = async () => {
     })
 }
 
+const fetchListUserLike = async () =>
+    await gameApi.getAllShort({
+        id: listIdUserLike
+    })
 
 const fetchListRating = async () =>
     await gameApi.getAllShort({
         limit: 18,
         filter: [
-            `created_at > ${getPastDay(365 * 5)}`,
-            "rating > 70",
-        ],
-        // sort: 'created_at desc'
+            `created_at > ${getPastDay(365 * 2)}`,
+            "aggregated_rating > 90",
+        ]
     })
 
 const fetchListHeroTwo = async () =>
@@ -48,7 +52,8 @@ const fetchListRecentlyUpdated = async () =>
         limit: 18,
         filter: [
             `updated_at > ${getPastDay(10)}`,
-            'platforms.abbreviation ="PS5"',
+            "release_dates.y > 2020",
+            'platforms = (48, 167, 130, 11, 6, 34)'
         ]
     })
 
@@ -56,7 +61,7 @@ const fetchListPlayWithControl = async () =>
     await gameApi.getAllShort({
         limit: 18,
         filter: [
-            `created_at > ${getPastDay(365)}`,
+            `created_at > ${getPastDay(365 * 3)}`,
             'platforms = (11, 130, 167)',
         ],
     })
@@ -64,7 +69,7 @@ const fetchListPlayWithControl = async () =>
 const fetchListCommingSoon = async () =>
     await gameApi.getAllShort({
         filter: [
-            "release_dates.y > 2022",
+            "release_dates.y > 2021",
         ],
         limit: 18,
         sort: "created_at asc"
@@ -116,6 +121,7 @@ export {
     fetchListMostPopular,
     fetchListAppreciate,
     fetchListHero,
+    fetchListUserLike,
     fetchListRating,
     fetchListHeroTwo,
     fetchListRecentlyUpdated,

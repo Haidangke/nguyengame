@@ -1,6 +1,5 @@
 import Switch from '@mui/material/Switch';
 import { auth } from 'Firebase/config';
-import useUser from 'hooks/useUser';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -11,7 +10,7 @@ function AuthPopover() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const { photoURL, displayName, removeUser } = useUser();
+    const { photoURL, displayName } = useSelector(state => state.auth.user);
     const theme = useSelector(state => state.auth.theme);
 
     const nextTheme = theme === 'light' ? 'dark' : 'light';
@@ -19,10 +18,9 @@ function AuthPopover() {
     const handleLogout = () => {
         auth.signOut();
         history.push("/login");
-        removeUser();
     }
 
-    const handleChangeTheme = (e) => {
+    const handleChangeTheme = () => {
         dispatch(setTheme(nextTheme));
     }
 
@@ -41,9 +39,6 @@ function AuthPopover() {
                 <div className="auth-popover__info-name">
                     {displayName}
                 </div>
-            </div>
-            <div className="auth-popover__list">
-                <div className="auth-popover__list-item">Danh sách game</div>
             </div>
             <div className="auth-popover__list">
                 <div className="auth-popover__list-item auth-popover__list-item--theme">

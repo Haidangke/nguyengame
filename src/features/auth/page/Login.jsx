@@ -1,38 +1,22 @@
-import { encode as base64_encode } from 'base-64';
-import firebase, { auth, db } from "Firebase/config";
+import firebase, { auth } from "Firebase/config";
 import React from 'react';
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebookF } from "react-icons/fa";
 import { SiNintendogamecube } from "react-icons/si";
 import { Link, useHistory } from 'react-router-dom';
 import "./Login.scss";
+
 function Login() {
     const history = useHistory();
     const handleLoginWithEmail = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider)
-            .then(res => {
-                const userInfo = res.user;
-                const userId = res.user.uid;
-                const { email, displayName, photoURL } = userInfo;
-                const user = { email, displayName, photoURL, userId };
-
-                const keyEncode = base64_encode('user');
-
-                localStorage.setItem(keyEncode, JSON.stringify(user));
+            .then(() => {
                 history.push("/");
-
-                const isNewUser = res.additionalUserInfo.isNewUser;
-                if (isNewUser) {
-                    db.collection('users').add(user);
-                };
             })
             .catch(error => {
                 console.log(error);
             })
     }
-
-    
 
     return (
         <div className="login">

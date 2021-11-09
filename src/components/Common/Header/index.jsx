@@ -1,9 +1,9 @@
 
 import { linksHeader } from "config/links";
 import Auth from "features/auth";
-import useUser from "hooks/useUser";
 import React from "react";
 import { SiNintendogamecube } from "react-icons/si";
+import { useSelector } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import "./Header.scss";
 import ThemeToggler from "./ThemeToggle";
@@ -11,10 +11,9 @@ import ThemeToggler from "./ThemeToggle";
 export default function Header() {
     const history = useHistory();
     const { pathname } = useLocation();
-    const { isLoggedIn } = useUser();
+    const { isLoggedIn } = useSelector(state => state.auth.user);
     const indexActive = linksHeader.findIndex(item =>
         (item.path === pathname || (item.match && item.match.includes(pathname))));
-
 
     return (
         <header className="header">

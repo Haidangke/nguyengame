@@ -31,15 +31,12 @@ function DetailInfo({ game, loading }) {
     ];
 
     const handleOpenShow = (index) => {
-        console.log(index);
         const curListIsShow = [...listIsShow];
         curListIsShow[index] = true;
-        console.log(curListIsShow)
         setListIsShow(curListIsShow);
     }
 
     const handleCLoseShow = (index) => {
-        console.log(index);
         const curListIsShow = [...listIsShow];
         curListIsShow[index] = false;
         setListIsShow(curListIsShow);

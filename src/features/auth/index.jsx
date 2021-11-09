@@ -1,13 +1,15 @@
 import { auth } from "Firebase/config";
 import useOnClickOutside from "hooks/useOnClickOutside";
 import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Auth.scss";
+import { resetUserInfo, setUserInfo } from "./authSlice";
 import AuthPopover from "./components/Popover";
-import { encode as base64_decode } from 'base-64';
 
 function Auth() {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem(base64_decode('user'))));
+    const dispatch = useDispatch();
+    const { isLoggedIn, photoURL, displayName } = useSelector(state => state.auth.user);
     const [isPoppver, setIsPopover] = useState(false);
     const authRef = useRef();
 
@@ -15,32 +17,29 @@ function Auth() {
         const unlisten = auth.onAuthStateChanged((user) => {
             if (user) {
                 const { email, displayName, photoURL } = user;
-                setUser({ email, displayName, photoURL })
+                const userId = user.uid;
+                dispatch(setUserInfo({ email, displayName, photoURL, userId, isLoggedIn: true }));
             } else {
-                setUser(null);
-                localStorage.removeItem("user")
+                dispatch(resetUserInfo());
             }
         });
         return () => unlisten();
-    }, []);
+    }, [dispatch]);
 
     useOnClickOutside(authRef, () => setIsPopover(false));
 
     return (
-        user ?
-            <div className="auth" ref={authRef}>
-                <div className="auth-avatar" >
-                    <img
-                        src={user.photoURL}
-                        alt={user.displayName}
-                        className="auth-avatar__image"
-                        onClick={() => setIsPopover(!isPoppver)}
-                    />
-                </div >
-                {
-                    isPoppver && <AuthPopover />
-                }</div>
-            : <Link to="/login" className="auth-login">Đăng nhập</Link>
+        isLoggedIn ? <div className="auth" ref={authRef}>
+            <div className="auth-avatar" >
+                {isLoggedIn && <img
+                    src={photoURL}
+                    alt={displayName}
+                    className="auth-avatar__image"
+                    onClick={() => setIsPopover(!isPoppver)}
+                />}
+            </div >
+            {isPoppver && <AuthPopover />}
+        </div> : <Link to="/login" className="auth-login">Đăng nhập</Link>
     );
 }
 

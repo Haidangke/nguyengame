@@ -39,7 +39,6 @@ function DetailJointDeveloper({ involved_companies }) {
                     });
                 })();
             } catch (error) {
-                console.log(error);
             }
         } else {
             setListJointDeveloper({

@@ -1,14 +1,18 @@
-import { getImage } from 'apis/apiConfig';
+import { getImage, getImageLow } from 'apis/apiConfig';
+import useResize from 'hooks/useResize';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 function DetailDescribe({ game, id }) {
     const [isShow, setIsShow] = useState(false);
+    const { onMobile } = useResize();
     const storyline = game?.storyline && game?.storyline.replaceAll('\n', '<br />');
     const artworks = game?.artworks;
     const summary = game?.summary;
     const describeRef = useRef(null);
 
     const maxHeight = !isShow ? '400px' : 'none';
+
+    const imageUrl = (url) => onMobile ? getImageLow(url) : getImage(url);
 
     const handleShowDescribe = () => {
         if (isShow) describeRef.current.scrollIntoView();
@@ -44,7 +48,7 @@ function DetailDescribe({ game, id }) {
                             className={`detail-describe__artworks-item 
                             ${(index % 3 === 0 || artworks.length <= 2) && "detail-describe__artworks-item--double"}`}
                         >
-                            <img src={getImage(artwork?.image_id)} alt="artwork" />
+                            <img src={imageUrl(artwork?.image_id)} alt="artwork" />
                         </div>
                     ))}
                 </div>

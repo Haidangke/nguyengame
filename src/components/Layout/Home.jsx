@@ -5,8 +5,8 @@ import Browse from "features/browse";
 import Detail from "features/detail";
 import Discover from "features/discover";
 import Topbar from "features/topbar";
-import React from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Switch, useHistory } from "react-router-dom";
 import "styles/index.scss";
 import "styles/variables.css";
 import "swiper/components/effect-fade/effect-fade.scss";
@@ -16,6 +16,14 @@ import "swiper/components/thumbs/thumbs.scss";
 import "swiper/swiper.scss";
 
 function App() {
+    const history = useHistory();
+    useEffect(() => {
+        if (Number(localStorage.getItem('expires_in')) < Date.now()) {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('expires_in');
+            history.push('/login-anonymous');
+        }
+    }, [history])
     return (
         <div className="app">
             <Header />
