@@ -9,7 +9,6 @@ import { Redirect, Route, Switch } from "react-router-dom";
 
 const queryClient = new QueryClient();
 function App() {
-    
     const isAccessToken = Boolean(localStorage.getItem('access_token') && localStorage.getItem('expires_in'));
     return (
         <QueryClientProvider client={queryClient}>

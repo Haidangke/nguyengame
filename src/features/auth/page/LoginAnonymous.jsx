@@ -1,6 +1,8 @@
 import { getOwnerCredentials } from 'apis/axiosClient';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
+import LinearProgress from '@mui/material/LinearProgress';
+import "./LoginAnonymous.scss";
 
 function LoginAnonymous() {
     const history = useHistory();
@@ -12,7 +14,10 @@ function LoginAnonymous() {
         })
     }, [history])
     return (
-        <div> </div>
+        <div className="login-anonymous">
+            <div className="login-anonymous__text" >Đang tải dữ liệu</div>
+            <LinearProgress />
+        </div>
     );
 }
 

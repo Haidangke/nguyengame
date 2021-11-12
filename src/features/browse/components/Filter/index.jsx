@@ -23,7 +23,7 @@ export default function BrowserFilter() {
                 className="browse-filter__mobile"
                 onClick={() => setIsFilterMobile(true)}
             >
-                Filter <BsFilterLeft />
+                Lọc <BsFilterLeft />
             </div>
             <div className={`browse-filter ${isFilterMobile && 'browse-filter--mobile'}`}>
                 <div className="browse-filter__list">
@@ -33,8 +33,8 @@ export default function BrowserFilter() {
                     <PlatformsFilter />
                 </div>
                 <div className="browse-filter__button">
-                    <span onClick={() => setIsFilterMobile(false)}>Cancel</span>
-                    <span onClick={handleDontFilterMobile}>Done</span>
+                    <span onClick={() => setIsFilterMobile(false)}>Hủy</span>
+                    <span onClick={handleDontFilterMobile}>Xong</span>
                 </div>
             </div>
         </Fragment>

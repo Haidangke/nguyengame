@@ -9,8 +9,8 @@ function TitleFilter({ handleResetFilter }) {
 
     return (
         <div className="browse-filter__title">
-            <span>Filters [{totalFilter}]</span>
-            <span onClick={handleResetFilter}>RESET</span>
+            <span>Bộ lọc [{totalFilter}]</span>
+            <span onClick={handleResetFilter}>ĐẶT LẠI</span>
         </div>
     );
 }
