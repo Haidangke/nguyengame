@@ -18,7 +18,11 @@
     &-background::after {
         content: "";
         bottom: 0;
-        background: linear-gradient(to bottom, transparent 0%, var(--color-theme) 100%);
+        background: linear-gradient(
+            to bottom,
+            transparent 0%,
+            var(--color-theme) 100%
+        );
     }
     &-background img {
         @include image(100%, 90vh);
@@ -96,14 +100,14 @@
         font-size: 1.6rem;
     }
     &-website__list {
-        @include flex(none, center);
+        display: flex;
         flex-wrap: wrap;
         background: var(--background-color2);
         padding: 20px 40px;
     }
     &-website__item {
-        width: 15%;
-        max-width: 15%;
+        width: calc(100% / 6);
+        max-width: calc(100% / 6);
         text-align: center;
         margin: 12px 0;
     }
@@ -197,7 +201,6 @@
             line-height: 1.5;
             color: var(--text-color1);
         }
-        
     }
 
     &-right__table-item > span:first-child {
@@ -208,7 +211,6 @@
         max-width: 50%;
         color: var(--text-color1);
         text-align: right;
-        
     }
 
     &-right__table-item > svg {
@@ -250,7 +252,7 @@
         flex: 1;
         @include flex(center, none);
         flex-direction: column;
-        max-width: calc(100% / 3 -10px);
+        max-width: calc(100% / 3 - 10px);
     }
     &-classification__item svg {
         width: 80px;

@@ -17,7 +17,7 @@
 
     &-left {
         flex: 1;
-        width: calc(100% - 180px) - 16px;
+        width: calc((100% - 180px) - 16px);
     }
 
     &-left--loading {
@@ -52,7 +52,11 @@
 
         width: 100%;
         height: 100%;
-        background: linear-gradient(to bottom, transparent 30%, var(--linear-gradient) 100%);
+        background: linear-gradient(
+            to bottom,
+            transparent 30%,
+            var(--linear-gradient) 100%
+        );
         z-index: 0;
     }
 
